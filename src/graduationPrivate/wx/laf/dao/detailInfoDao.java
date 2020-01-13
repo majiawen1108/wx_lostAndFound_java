@@ -17,69 +17,7 @@ import graduationPublic.wx.laf.vo.userVO;
  *
  */
 public class detailInfoDao extends BaseDao{
-/*
-	public static List<FOUNDdetailInfoVO> selectAllBlog(FOUNDdetailInfoVO foundDetailInfo) {
-		List<FOUNDdetailInfoVO> list = new ArrayList<FOUNDdetailInfoVO>();
 
-		Connection con = null;
-		PreparedStatement psmt = null;
-
-		try {
-			// 1.建立连接
-			con = getCon();
-			// 2.创建语句
-			String sql = "select found_id,Found_thing_id,"
-					+ "found_title,found_category,found_lost_name,"
-					+ "get_date,found_address,found_state,found_details,"
-					+ "send_date,found_name,found_tel,found_pic "
-					+ "from found_info f left join laf_user u "
-					+ "on f.user_id=u.user_id where f.user_id=?";
-			psmt = con.prepareStatement(sql);
-			//替换？
-			psmt.setString(1, foundDetailInfo.getUserId());
-			
-			
-			// 执行语句
-			ResultSet rs = psmt.executeQuery();
-			FOUNDdetailInfoVO foundDetailInfo1 = null;
-			userVO author = null;
-			while(rs.next()) {
-				// 创建对象，使用查询出的数据对对象进行装配
-				foundDetailInfo1 = new FOUNDdetailInfoVO();
-				author  =new userVO();
-				foundDetailInfo1.setFound_title(rs.getString("found_title"));
-				foundDetailInfo1.setFound_category(rs.getString("found_category"));
-				foundDetailInfo1.setFound_lost_name(rs.getString("found_lost_name"));
-				foundDetailInfo1.setGet_date(rs.getString("get_date"));
-				foundDetailInfo1.setFound_address(rs.getString("found_address"));
-				foundDetailInfo1.setFound_state(rs.getString("found_state"));
-				foundDetailInfo1.setFound_details(rs.getString("found_details"));
-				foundDetailInfo1.setSend_date(rs.getString("send_date"));
-				foundDetailInfo1.setFound_name(rs.getString("found_name"));
-				foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
-				foundDetailInfo1.setUserId(rs.getString("user_id"));
-				foundDetailInfo1.setFound_pic(rs.getString("found_pic"));
-				
-				
-				author.setId(rs.getInt("id"));
-				
-				//将作者绑定到博文对象中
-				foundDetailInfo1.setUser(author);
-				list.add(foundDetailInfo1);
-			}
-			rs.close();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			closeCon(con, psmt);
-		}
-		// 返回放数据的容器
-		return list;
-	}
-	*/
-	
 	/***
 	 * 
 	 * @param id
