@@ -11,7 +11,7 @@ import graduationPublic.wx.laf.vo.FOUNDdetailInfoVO;
 import graduationPublic.wx.laf.vo.SEARCHdetailInfoVO;
 import graduationPublic.wx.laf.vo.userVO;
 /**
- * 详情数据库类
+ * 发表失物详情数据库类
  * @author 马家文
  *
  */
@@ -23,8 +23,8 @@ public class searchInfoDao extends BaseDao{
 	 * @return
 	 * 	查询单条数据
 	 */
-	public static List<FOUNDdetailInfoVO> queryOne(String id) {
-		List<FOUNDdetailInfoVO> list = new ArrayList<FOUNDdetailInfoVO>();
+	public static List<SEARCHdetailInfoVO> queryOne(String id) {
+		List<SEARCHdetailInfoVO> list = new ArrayList<SEARCHdetailInfoVO>();
 
 		Connection con = null;
 		PreparedStatement psmt = null;
@@ -33,47 +33,38 @@ public class searchInfoDao extends BaseDao{
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "select image,found_title,found_category,"
-					+ "found_state,found_date,found_address,found_id,"
-					+ "found_lost_name,found_tag,found_det_address,"
-					+ "id_address,found_details,found_name,found_tel,"
-					+ "found_wx,found_QQ ,found_create_date "
-					+ "from laf_pageinfo f left join laf_user u on f.def1=u.def1 where f.id = "+id+"";
+			String sql = "select * from laf_search f left join laf_user u on f.def1=u.def1 where f.id = "+id+"";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句
 			ResultSet rs = psmt.executeQuery();
-			FOUNDdetailInfoVO foundDetailInfo1 = null;
+			SEARCHdetailInfoVO searcHdetailInfoVO = null;
 			userVO author = null;
 			while(rs.next()) {
 				// 创建对象，使用查询出的数据对对象进行装配
-				foundDetailInfo1 = new FOUNDdetailInfoVO();
+				searcHdetailInfoVO = new SEARCHdetailInfoVO();
 				author  =new userVO();
-//				foundDetailInfo1.setId(rs.getInt("id"));
-				foundDetailInfo1.setFound_title(rs.getString("found_title"));
-				foundDetailInfo1.setFound_category(rs.getString("found_category"));
-				foundDetailInfo1.setFound_lost_name(rs.getString("found_lost_name"));
-				foundDetailInfo1.setFound_date(rs.getString("found_date"));
-				foundDetailInfo1.setFound_address(rs.getString("found_address"));
-				foundDetailInfo1.setFound_state(rs.getString("found_state"));
-				foundDetailInfo1.setFound_details(rs.getString("found_details"));
-				foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
-				foundDetailInfo1.setFound_det_address(rs.getString("found_det_address"));
-				foundDetailInfo1.setFound_tag(rs.getString("found_tag"));
-				foundDetailInfo1.setFound_id(rs.getString("found_id"));
-				foundDetailInfo1.setId_address(rs.getString("id_address"));
-				foundDetailInfo1.setFound_name(rs.getString("found_name"));
-				foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
-				foundDetailInfo1.setFound_wx(rs.getString("found_wx"));
-				foundDetailInfo1.setFound_QQ(rs.getString("found_QQ"));
-
-				foundDetailInfo1.setImage(rs.getString("image"));
+				searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
+				searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
+				searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
+				searcHdetailInfoVO.setPaid(rs.getString("paid"));
+				searcHdetailInfoVO.setMoney(rs.getString("money"));
+				searcHdetailInfoVO.setSearch_date(rs.getString("search_date"));
+				searcHdetailInfoVO.setSearch_address(rs.getString("search_address"));
+				searcHdetailInfoVO.setSearch_det_address(rs.getString("search_det_address"));
+				searcHdetailInfoVO.setSearch_state(rs.getString("search_state"));
+				searcHdetailInfoVO.setSend_date(rs.getString("search_create_date"));
+				searcHdetailInfoVO.setSearch_name(rs.getString("search_name"));
+				searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
+				searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
+				searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
+				searcHdetailInfoVO.setImage(rs.getString("image"));
 				
 				
 //				author.setDef1(def1);
 				//将作者绑定到博文对象中
-				foundDetailInfo1.setUser(author);
-				list.add(foundDetailInfo1);
+				searcHdetailInfoVO.setUser(author);
+				list.add(searcHdetailInfoVO);
 			}
 			rs.close();
 
@@ -93,8 +84,8 @@ public class searchInfoDao extends BaseDao{
  * 	查询我所发布的所有
  */
 	//def1暂时用来代替openid作为微信小程序用户的唯一标示
-	public static List<FOUNDdetailInfoVO> selectMineBlog(String def1) {
-		List<FOUNDdetailInfoVO> list = new ArrayList<FOUNDdetailInfoVO>();
+	public static List<SEARCHdetailInfoVO> selectMineBlog(String def1) {
+		List<SEARCHdetailInfoVO> list = new ArrayList<SEARCHdetailInfoVO>();
 
 		Connection con = null;
 		PreparedStatement psmt = null;
@@ -103,45 +94,39 @@ public class searchInfoDao extends BaseDao{
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "select f.id,image,found_title,found_category,"
-					+ "found_state,found_date,found_address,found_id,"
-					+ "found_lost_name,found_tag,found_det_address,"
-					+ "id_address,found_details,found_name,found_tel,"
-					+ "found_wx,found_QQ ,found_create_date "
-					+ "from laf_pageinfo f left join laf_user u on f.def1=u.def1 where u.def1 = "+def1+" order by found_create_date desc,id desc";
+			String sql = "select * from laf_pageinfo f left join laf_user u on f.def1=u.def1 where u.def1 = "+def1+" order by found_create_date desc,id desc";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句
 			ResultSet rs = psmt.executeQuery();
-			FOUNDdetailInfoVO foundDetailInfo1 = null;
+			SEARCHdetailInfoVO searcHdetailInfoVO = null;
 			userVO author = null;
 			while(rs.next()) {
 				// 创建对象，使用查询出的数据对对象进行装配
-				foundDetailInfo1 = new FOUNDdetailInfoVO();
+				searcHdetailInfoVO = new SEARCHdetailInfoVO();
 				author  =new userVO();
-				foundDetailInfo1.setId(rs.getInt("id"));
-				foundDetailInfo1.setFound_title(rs.getString("found_title"));
-				foundDetailInfo1.setFound_category(rs.getString("found_category"));
-				foundDetailInfo1.setFound_lost_name(rs.getString("found_lost_name"));
-				foundDetailInfo1.setFound_date(rs.getString("found_date"));
-				foundDetailInfo1.setFound_address(rs.getString("found_address"));
-				foundDetailInfo1.setFound_state(rs.getString("found_state"));
-				foundDetailInfo1.setFound_details(rs.getString("found_details"));
-				foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
-				foundDetailInfo1.setFound_name(rs.getString("found_name"));
-				foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
-				foundDetailInfo1.setFound_tel(rs.getString("found_wx"));
-				foundDetailInfo1.setFound_tel(rs.getString("found_QQ"));
-
-//				foundDetailInfo1.setUserId(rs.getString("user_id"));
-				foundDetailInfo1.setImage(rs.getString("image"));
+				searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
+				searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
+				searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
+				searcHdetailInfoVO.setPaid(rs.getString("paid"));
+				searcHdetailInfoVO.setMoney(rs.getString("money"));
+				searcHdetailInfoVO.setSearch_date(rs.getString("search_date"));
+				searcHdetailInfoVO.setSearch_address(rs.getString("search_address"));
+				searcHdetailInfoVO.setSearch_det_address(rs.getString("search_det_address"));
+				searcHdetailInfoVO.setSearch_state(rs.getString("search_state"));
+				searcHdetailInfoVO.setSend_date(rs.getString("search_create_date"));
+				searcHdetailInfoVO.setSearch_name(rs.getString("search_name"));
+				searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
+				searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
+				searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
+				searcHdetailInfoVO.setImage(rs.getString("image"));
 				
 				
 //				author.setUserId(rs.getString("user_id"));
 				author.setDef1(def1);
 				//将作者绑定到博文对象中
-				foundDetailInfo1.setUser(author);
-				list.add(foundDetailInfo1);
+				searcHdetailInfoVO.setUser(author);
+				list.add(searcHdetailInfoVO);
 			}
 			rs.close();
 
@@ -158,8 +143,8 @@ public class searchInfoDao extends BaseDao{
 	 * 	主页用的，查询所有账号下面的发布内容
 	 * @return
 	 */
-		public static List<FOUNDdetailInfoVO> selectAllBlog() {
-			List<FOUNDdetailInfoVO> list = new ArrayList<FOUNDdetailInfoVO>();
+		public static List<SEARCHdetailInfoVO> selectAllBlog() {
+			List<SEARCHdetailInfoVO> list = new ArrayList<SEARCHdetailInfoVO>();
 
 			Connection con = null;
 			PreparedStatement psmt = null;
@@ -168,43 +153,36 @@ public class searchInfoDao extends BaseDao{
 				// 1.建立连接
 				con = getCon();
 				// 2.创建语句
-				String sql = "select id,image,found_title,found_category,"
-						+ "found_state,found_date,found_address,found_id,"
-						+ "found_lost_name,found_tag,found_det_address,"
-						+ "id_address,found_details,found_name,found_tel,"
-						+ "found_wx,found_QQ ,found_create_date "
-						+ "from laf_pageinfo order by found_create_date desc,id desc";
+				String sql = "select * from laf_pageinfo order by found_create_date desc,id desc";
 				psmt = con.prepareStatement(sql);
 				
 				// 执行语句
 				ResultSet rs = psmt.executeQuery();
-				FOUNDdetailInfoVO foundDetailInfo1 = null;
+				SEARCHdetailInfoVO searcHdetailInfoVO = null;
 				userVO author = null;
 				while(rs.next()) {
 					// 创建对象，使用查询出的数据对对象进行装配
-					foundDetailInfo1 = new FOUNDdetailInfoVO();
+					searcHdetailInfoVO = new SEARCHdetailInfoVO();
 					author  =new userVO();
-					foundDetailInfo1.setId(rs.getInt("id"));
-					foundDetailInfo1.setFound_title(rs.getString("found_title"));
-					foundDetailInfo1.setFound_category(rs.getString("found_category"));
-					foundDetailInfo1.setFound_lost_name(rs.getString("found_lost_name"));
-					foundDetailInfo1.setFound_date(rs.getString("found_date"));
-					foundDetailInfo1.setFound_address(rs.getString("found_address"));
-					foundDetailInfo1.setFound_state(rs.getString("found_state"));
-					foundDetailInfo1.setFound_details(rs.getString("found_details"));
-					foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
-					foundDetailInfo1.setFound_name(rs.getString("found_name"));
-					foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
-					foundDetailInfo1.setFound_tel(rs.getString("found_wx"));
-					foundDetailInfo1.setFound_tel(rs.getString("found_QQ"));
-					foundDetailInfo1.setImage(rs.getString("image"));
-
-//					foundDetailInfo1.setUserId(rs.getString("user_id"));
-					
+					searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
+					searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
+					searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
+					searcHdetailInfoVO.setPaid(rs.getString("paid"));
+					searcHdetailInfoVO.setMoney(rs.getString("money"));
+					searcHdetailInfoVO.setSearch_date(rs.getString("search_date"));
+					searcHdetailInfoVO.setSearch_address(rs.getString("search_address"));
+					searcHdetailInfoVO.setSearch_det_address(rs.getString("search_det_address"));
+					searcHdetailInfoVO.setSearch_state(rs.getString("search_state"));
+					searcHdetailInfoVO.setSend_date(rs.getString("search_create_date"));
+					searcHdetailInfoVO.setSearch_name(rs.getString("search_name"));
+					searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
+					searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
+					searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
+					searcHdetailInfoVO.setImage(rs.getString("image"));
 			
 					//将作者绑定到博文对象中
-					foundDetailInfo1.setUser(author);
-					list.add(foundDetailInfo1);
+					searcHdetailInfoVO.setUser(author);
+					list.add(searcHdetailInfoVO);
 				}
 				rs.close();
 
@@ -222,8 +200,8 @@ public class searchInfoDao extends BaseDao{
 		 * 	主页用的，查询所有账号下面的发布内容根据tag
 		 * @return
 		 */
-			public static List<FOUNDdetailInfoVO> selectAllBlogBytag(String found_category) {
-				List<FOUNDdetailInfoVO> list = new ArrayList<FOUNDdetailInfoVO>();
+			public static List<SEARCHdetailInfoVO> selectAllBlogBytag(String found_category) {
+				List<SEARCHdetailInfoVO> list = new ArrayList<SEARCHdetailInfoVO>();
 
 				Connection con = null;
 				PreparedStatement psmt = null;
@@ -254,33 +232,32 @@ public class searchInfoDao extends BaseDao{
 					
 					// 执行语句
 					ResultSet rs = psmt.executeQuery();
-					FOUNDdetailInfoVO foundDetailInfo1 = null;
+					SEARCHdetailInfoVO searcHdetailInfoVO = null;
 					userVO author = null;
 					while(rs.next()) {
 						// 创建对象，使用查询出的数据对对象进行装配
-						foundDetailInfo1 = new FOUNDdetailInfoVO();
+						searcHdetailInfoVO = new SEARCHdetailInfoVO();
 						author  =new userVO();
-						foundDetailInfo1.setId(rs.getInt("id"));
-						foundDetailInfo1.setFound_title(rs.getString("found_title"));
-						foundDetailInfo1.setFound_category(rs.getString("found_category"));
-						foundDetailInfo1.setFound_lost_name(rs.getString("found_lost_name"));
-						foundDetailInfo1.setFound_date(rs.getString("found_date"));
-						foundDetailInfo1.setFound_address(rs.getString("found_address"));
-						foundDetailInfo1.setFound_state(rs.getString("found_state"));
-						foundDetailInfo1.setFound_details(rs.getString("found_details"));
-						foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
-						foundDetailInfo1.setFound_name(rs.getString("found_name"));
-						foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
-						foundDetailInfo1.setFound_tel(rs.getString("found_wx"));
-						foundDetailInfo1.setFound_tel(rs.getString("found_QQ"));
-						foundDetailInfo1.setImage(rs.getString("image"));
-
-//						foundDetailInfo1.setUserId(rs.getString("user_id"));
+						searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
+						searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
+						searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
+						searcHdetailInfoVO.setPaid(rs.getString("paid"));
+						searcHdetailInfoVO.setMoney(rs.getString("money"));
+						searcHdetailInfoVO.setSearch_date(rs.getString("search_date"));
+						searcHdetailInfoVO.setSearch_address(rs.getString("search_address"));
+						searcHdetailInfoVO.setSearch_det_address(rs.getString("search_det_address"));
+						searcHdetailInfoVO.setSearch_state(rs.getString("search_state"));
+						searcHdetailInfoVO.setSend_date(rs.getString("search_create_date"));
+						searcHdetailInfoVO.setSearch_name(rs.getString("search_name"));
+						searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
+						searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
+						searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
+						searcHdetailInfoVO.setImage(rs.getString("image"));
 						
 				
 						//将作者绑定到博文对象中
-						foundDetailInfo1.setUser(author);
-						list.add(foundDetailInfo1);
+						searcHdetailInfoVO.setUser(author);
+						list.add(searcHdetailInfoVO);
 					}
 					rs.close();
 
@@ -364,7 +341,7 @@ public class searchInfoDao extends BaseDao{
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "delete from laf_pageinfo where id = ? and def1 = ?";
+			String sql = "delete from laf_search where id = ? and def1 = ?";
 			psmt = con.prepareStatement(sql);
 			// 替换？
 			

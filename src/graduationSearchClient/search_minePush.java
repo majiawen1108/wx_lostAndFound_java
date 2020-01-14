@@ -1,4 +1,4 @@
-package graduationClient;
+package graduationSearchClient;
 
 
 
@@ -15,15 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import graduationPrivate.wx.laf.dao.detailInfoDao;
+import graduationPrivate.wx.laf.dao.searchInfoDao;
 import graduationPublic.wx.laf.vo.FOUNDdetailInfoVO;
+import graduationPublic.wx.laf.vo.SEARCHdetailInfoVO;
 
 /**
  * 
  * @author 马家文
- *	查询我发布的拾物招领
+ *	查询我发布的失物招领
  */
-@WebServlet("/minepush.do")
-public class minePush  extends HttpServlet {
+@WebServlet("/search-minepush.do")
+public class search_minePush  extends HttpServlet {
 
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +42,7 @@ public class minePush  extends HttpServlet {
 	        String user = req.getParameter("def1");
 	        
 			//访问数据库获取所有的博文信息
-			List<FOUNDdetailInfoVO> list = detailInfoDao.selectMineBlog(user);
+			List<SEARCHdetailInfoVO> list = searchInfoDao.selectMineBlog(user);
 			//将数据绑定到请求对象中
 			req.setAttribute("list", list);
 			 //返回值给微信小程序

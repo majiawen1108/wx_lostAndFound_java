@@ -20,7 +20,7 @@ import graduationPublic.wx.laf.vo.userVO;
 /**
  * 
  * @author 马家文
- *	主页：查询当前账户下所有的信息
+ *	主页：查询所有的信息
  */
 @WebServlet("/index.do")
 public class detailInfo  extends HttpServlet {

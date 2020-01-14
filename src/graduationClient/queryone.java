@@ -20,7 +20,7 @@ import graduationPublic.wx.laf.vo.FOUNDdetailInfoVO;
 /**
  * 
  * @author 马家文
- *	查询单条的详细内容
+ *	查询单条的详细内容（拾物招领）
  */
 @WebServlet("/queryone.do")
 public class queryone  extends HttpServlet {

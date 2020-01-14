@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import graduationPrivate.wx.laf.dao.searchInfoDao;
 import graduationPublic.wx.laf.vo.SEARCHdetailInfoVO;
 import graduationPublic.wx.laf.vo.userVO;
-
+/**
+ * 发布失物
+ * @author 马家文
+ *
+ */
 @WebServlet("/search.do")
 public class search extends HttpServlet{
 

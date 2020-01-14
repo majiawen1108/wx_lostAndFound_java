@@ -12,7 +12,7 @@ import java.util.List;
 import graduationPublic.wx.laf.vo.FOUNDdetailInfoVO;
 import graduationPublic.wx.laf.vo.userVO;
 /**
- * 详情数据库类
+ * 拾物招领详情数据库类
  * @author 马家文
  *
  */

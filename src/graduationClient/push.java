@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import graduationPrivate.wx.laf.dao.detailInfoDao;
 import graduationPublic.wx.laf.vo.FOUNDdetailInfoVO;
 import graduationPublic.wx.laf.vo.userVO;
-
+/**
+ * 发布拾物招领
+ * @author 马家文
+ *
+ */
 @WebServlet("/push.do")
 public class push extends HttpServlet{
 

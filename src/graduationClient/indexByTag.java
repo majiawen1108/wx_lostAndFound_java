@@ -18,7 +18,7 @@ import graduationPublic.wx.laf.vo.FOUNDdetailInfoVO;
 /**
  * 
  * @author 马家文
- *	主页：查询当前账户下所有的信息
+ *	主页：查询当前账户下所有的信息（按照标签查询）
  */
 @WebServlet("/indexbytag.do")
 public class indexByTag  extends HttpServlet {
