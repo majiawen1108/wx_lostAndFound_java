@@ -58,7 +58,7 @@ public class searchInfoDao extends BaseDao{
 				searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
 				searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
 				searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
-				searcHdetailInfoVO.setImage(rs.getString("image"));
+				searcHdetailInfoVO.setImage(rs.getString("search_image"));
 				
 				
 //				author.setDef1(def1);
@@ -94,7 +94,7 @@ public class searchInfoDao extends BaseDao{
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "select * from laf_pageinfo f left join laf_user u on f.def1=u.def1 where u.def1 = "+def1+" order by found_create_date desc,id desc";
+			String sql = "select * from laf_search f left join laf_user u on f.def1=u.def1 where u.def1 = "+def1+" order by search_create_date desc,id desc";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句
@@ -119,7 +119,7 @@ public class searchInfoDao extends BaseDao{
 				searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
 				searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
 				searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
-				searcHdetailInfoVO.setImage(rs.getString("image"));
+				searcHdetailInfoVO.setImage(rs.getString("search_image"));
 				
 				
 //				author.setUserId(rs.getString("user_id"));
@@ -153,7 +153,7 @@ public class searchInfoDao extends BaseDao{
 				// 1.建立连接
 				con = getCon();
 				// 2.创建语句
-				String sql = "select * from laf_pageinfo order by found_create_date desc,id desc";
+				String sql = "select * from laf_search order by search_create_date desc,id desc";
 				psmt = con.prepareStatement(sql);
 				
 				// 执行语句
@@ -178,7 +178,7 @@ public class searchInfoDao extends BaseDao{
 					searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
 					searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
 					searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
-					searcHdetailInfoVO.setImage(rs.getString("image"));
+					searcHdetailInfoVO.setImage(rs.getString("search_image"));
 			
 					//将作者绑定到博文对象中
 					searcHdetailInfoVO.setUser(author);
@@ -212,19 +212,9 @@ public class searchInfoDao extends BaseDao{
 					// 2.创建语句
 					String sql = "";
 					if(found_category.equals("首页")) {
-						sql = "select id,image,found_title,found_category,"
-								+ "found_state,found_date,found_address,found_id,"
-								+ "found_lost_name,found_tag,found_det_address,"
-								+ "id_address,found_details,found_name,found_tel,"
-								+ "found_wx,found_QQ ,found_create_date "
-								+ "from laf_pageinfo";
+						sql = "select * from laf_search";
 					}else {
-						sql = "select id,image,found_title,found_category,"
-								+ "found_state,found_date,found_address,found_id,"
-								+ "found_lost_name,found_tag,found_det_address,"
-								+ "id_address,found_details,found_name,found_tel,"
-								+ "found_wx,found_QQ ,found_create_date "
-								+ "from laf_pageinfo where found_category = '"+found_category+"'";
+						sql = "select * from laf_search where found_category = '"+found_category+"'";
 						
 					}
 					
@@ -252,7 +242,7 @@ public class searchInfoDao extends BaseDao{
 						searcHdetailInfoVO.setSearch_tel(rs.getString("search_tel"));
 						searcHdetailInfoVO.setSearch_wx(rs.getString("search_wx"));
 						searcHdetailInfoVO.setSearch_QQ(rs.getString("search_QQ"));
-						searcHdetailInfoVO.setImage(rs.getString("image"));
+						searcHdetailInfoVO.setImage(rs.getString("search_image"));
 						
 				
 						//将作者绑定到博文对象中
