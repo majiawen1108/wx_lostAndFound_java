@@ -44,6 +44,7 @@ public class searchInfoDao extends BaseDao{
 				// 创建对象，使用查询出的数据对对象进行装配
 				searcHdetailInfoVO = new SEARCHdetailInfoVO();
 				author  =new userVO();
+				searcHdetailInfoVO.setId(rs.getInt("id"));
 				searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
 				searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
 				searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
@@ -94,7 +95,12 @@ public class searchInfoDao extends BaseDao{
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "select * from laf_search f left join laf_user u on f.def1=u.def1 where u.def1 = "+def1+" order by search_create_date desc,id desc";
+			String sql = "select f.id,search_image,search_title,"
+					+ "search_category,search_details,paid,money,"
+					+ "search_date,search_address,search_det_address,"
+					+ "search_state,search_name,search_tel,search_wx,search_QQ,search_create_date "
+					+ "from laf_search f left join laf_user u on f.def1=u.def1"
+					+ " where u.def1 = "+def1+" order by search_create_date desc,f.id desc";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句
@@ -105,6 +111,7 @@ public class searchInfoDao extends BaseDao{
 				// 创建对象，使用查询出的数据对对象进行装配
 				searcHdetailInfoVO = new SEARCHdetailInfoVO();
 				author  =new userVO();
+				searcHdetailInfoVO.setId(rs.getInt("id"));
 				searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
 				searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
 				searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
@@ -164,6 +171,7 @@ public class searchInfoDao extends BaseDao{
 					// 创建对象，使用查询出的数据对对象进行装配
 					searcHdetailInfoVO = new SEARCHdetailInfoVO();
 					author  =new userVO();
+					searcHdetailInfoVO.setId(rs.getInt("id"));
 					searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
 					searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
 					searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));
@@ -200,7 +208,7 @@ public class searchInfoDao extends BaseDao{
 		 * 	主页用的，查询所有账号下面的发布内容根据tag
 		 * @return
 		 */
-			public static List<SEARCHdetailInfoVO> selectAllBlogBytag(String found_category) {
+			public static List<SEARCHdetailInfoVO> selectAllBlogBytag(String search_category) {
 				List<SEARCHdetailInfoVO> list = new ArrayList<SEARCHdetailInfoVO>();
 
 				Connection con = null;
@@ -211,10 +219,10 @@ public class searchInfoDao extends BaseDao{
 					con = getCon();
 					// 2.创建语句
 					String sql = "";
-					if(found_category.equals("首页")) {
+					if(search_category.equals("首页")) {
 						sql = "select * from laf_search";
 					}else {
-						sql = "select * from laf_search where found_category = '"+found_category+"'";
+						sql = "select * from laf_search where search_category = '"+search_category+"'";
 						
 					}
 					
@@ -228,6 +236,7 @@ public class searchInfoDao extends BaseDao{
 						// 创建对象，使用查询出的数据对对象进行装配
 						searcHdetailInfoVO = new SEARCHdetailInfoVO();
 						author  =new userVO();
+						searcHdetailInfoVO.setId(rs.getInt("id"));
 						searcHdetailInfoVO.setSearch_title(rs.getString("search_title"));
 						searcHdetailInfoVO.setSearch_category(rs.getString("search_category"));
 						searcHdetailInfoVO.setSearch_details(rs.getString("search_details"));

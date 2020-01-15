@@ -37,10 +37,10 @@ public class search_indexByTag  extends HttpServlet {
 	        /* 星号表示所有的异域请求都可以接受， */
 	        resp.setHeader("Access-Control-Allow-Methods", "GET,POST");
  
-	        String found_category = req.getParameter("found_category");
+	        String search_category = req.getParameter("search_category");
 	        
 			//访问数据库获取所有的博文信息
-			List<SEARCHdetailInfoVO> list = searchInfoDao.selectAllBlogBytag(found_category);
+			List<SEARCHdetailInfoVO> list = searchInfoDao.selectAllBlogBytag(search_category);
 			//将数据绑定到请求对象中
 			req.setAttribute("list", list);
 			 //返回值给微信小程序
