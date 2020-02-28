@@ -21,7 +21,8 @@ public class push extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String image = req.getParameter("image");
+		String img = req.getParameter("image");
+		String image = img.substring(2, img.length()-2);
 		String found_title = req.getParameter("found_title");
 		String found_category = req.getParameter("found_category");
 		String found_state = req.getParameter("found_state");

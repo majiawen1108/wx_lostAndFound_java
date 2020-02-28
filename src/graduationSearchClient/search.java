@@ -21,7 +21,8 @@ public class search extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String image = req.getParameter("image");
+		String img = req.getParameter("image");
+		String image = img.substring(2, img.length()-2);
 		String search_title = req.getParameter("search_title");
 		String search_category = req.getParameter("search_category");
 		String search_details = req.getParameter("search_details");

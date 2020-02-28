@@ -361,6 +361,42 @@ public class searchInfoDao extends BaseDao{
 			closeCon(con,psmt);
 		}
 	}
+	
+	/**
+	 * 修改状态功能
+	 * @param id
+	 * @param def1
+	 */
+	public static void updateBlog(String id, String def1) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		
+		try {
+			
+			// 1.建立连接
+			con = getCon();
+			// 2.创建语句
+			String sql = "update laf_search set search_state = '已找到' where id = ? and def1 = ?";
+			psmt = con.prepareStatement(sql);
+			// 替换？
+			
+			psmt.setString(1, id);
+			psmt.setString(2, def1);
+			
+			// 3.执行语句
+			psmt.executeUpdate();
+			
+			// 4.处理结果
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			closeCon(con,psmt);
+		}
+	}
 //	public static int addThumb(String blogId) {
 //		
 //		int i=0;

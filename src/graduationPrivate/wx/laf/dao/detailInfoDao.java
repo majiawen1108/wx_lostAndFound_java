@@ -355,6 +355,42 @@ public class detailInfoDao extends BaseDao{
 		return i;
 	}
 	/**
+	 * 更改状态功能
+	 * @param id
+	 * @param def1
+	 */
+	public static void updateBlog(String id, String def1) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		
+		try {
+			
+			// 1.建立连接
+			con = getCon();
+			// 2.创建语句
+			String sql = "update laf_pageinfo set found_state = '已认领' where id = ? and def1 = ?";
+			psmt = con.prepareStatement(sql);
+			// 替换？
+			
+			psmt.setString(1, id);
+			psmt.setString(2, def1);
+			
+			// 3.执行语句
+			psmt.executeUpdate();
+			
+			// 4.处理结果
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			closeCon(con,psmt);
+		}
+	}
+	
+	/**
 	 * 删除功能
 	 * @param id
 	 * @param def1
