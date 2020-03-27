@@ -29,7 +29,7 @@ public class FOUNDdetailInfoVO {
 	// 详情
 	private String found_details;
 	// 发布日期
-	private String send_date;
+	private String found_create_date;
 	// 发布人
 	private String found_name;
 	private String userId;
@@ -73,7 +73,7 @@ public class FOUNDdetailInfoVO {
 		this.found_address = found_address;
 		this.found_state = found_state;
 		this.found_details = found_details;
-		this.send_date = send_date;
+		this.found_create_date = send_date;
 		this.found_name = found_name;
 		this.userId = userId;
 		this.found_tel = found_tel;
@@ -166,12 +166,12 @@ public class FOUNDdetailInfoVO {
 		this.found_details = found_details;
 	}
 
-	public String getSend_date() {
-		return send_date;
+	public String getFound_create_date() {
+		return found_create_date;
 	}
 
-	public void setSend_date(String send_date) {
-		this.send_date = send_date;
+	public void setFound_create_date(String found_create_date) {
+		this.found_create_date = found_create_date;
 	}
 
 	public String getFound_name() {

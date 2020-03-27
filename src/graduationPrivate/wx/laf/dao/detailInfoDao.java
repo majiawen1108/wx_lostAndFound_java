@@ -39,7 +39,7 @@ public class detailInfoDao extends BaseDao{
 					+ "found_lost_name,found_tag,found_det_address,"
 					+ "id_address,found_details,found_name,found_tel,"
 					+ "found_wx,found_QQ ,found_create_date "
-					+ "from laf_pageinfo f left join laf_user u on f.def1=u.def1 where f.id = "+id+"";
+					+ "from laf_pageinfo where id = "+id+"";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句
@@ -58,7 +58,7 @@ public class detailInfoDao extends BaseDao{
 				foundDetailInfo1.setFound_address(rs.getString("found_address"));
 				foundDetailInfo1.setFound_state(rs.getString("found_state"));
 				foundDetailInfo1.setFound_details(rs.getString("found_details"));
-				foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
+				foundDetailInfo1.setFound_create_date(rs.getString("found_create_date"));
 				foundDetailInfo1.setFound_det_address(rs.getString("found_det_address"));
 				foundDetailInfo1.setFound_tag(rs.getString("found_tag"));
 				foundDetailInfo1.setFound_id(rs.getString("found_id"));
@@ -128,7 +128,7 @@ public class detailInfoDao extends BaseDao{
 				foundDetailInfo1.setFound_address(rs.getString("found_address"));
 				foundDetailInfo1.setFound_state(rs.getString("found_state"));
 				foundDetailInfo1.setFound_details(rs.getString("found_details"));
-				foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
+				foundDetailInfo1.setFound_create_date(rs.getString("found_create_date"));
 				foundDetailInfo1.setFound_name(rs.getString("found_name"));
 				foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
 				foundDetailInfo1.setFound_tel(rs.getString("found_wx"));
@@ -193,7 +193,7 @@ public class detailInfoDao extends BaseDao{
 					foundDetailInfo1.setFound_address(rs.getString("found_address"));
 					foundDetailInfo1.setFound_state(rs.getString("found_state"));
 					foundDetailInfo1.setFound_details(rs.getString("found_details"));
-					foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
+					foundDetailInfo1.setFound_create_date(rs.getString("found_create_date"));
 					foundDetailInfo1.setFound_name(rs.getString("found_name"));
 					foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
 					foundDetailInfo1.setFound_tel(rs.getString("found_wx"));
@@ -269,7 +269,7 @@ public class detailInfoDao extends BaseDao{
 						foundDetailInfo1.setFound_address(rs.getString("found_address"));
 						foundDetailInfo1.setFound_state(rs.getString("found_state"));
 						foundDetailInfo1.setFound_details(rs.getString("found_details"));
-						foundDetailInfo1.setSend_date(rs.getString("found_create_date"));
+						foundDetailInfo1.setFound_create_date(rs.getString("found_create_date"));
 						foundDetailInfo1.setFound_name(rs.getString("found_name"));
 						foundDetailInfo1.setFound_tel(rs.getString("found_tel"));
 						foundDetailInfo1.setFound_tel(rs.getString("found_wx"));
@@ -318,7 +318,7 @@ public class detailInfoDao extends BaseDao{
 					+ "(image,found_title,found_category,found_state,found_date,"
 					+ "found_address,found_id,found_lost_name,found_tag,"
 					+ "found_det_address,id_address,found_details,found_name,"
-					+ "found_tel,found_wx,found_QQ,def1) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "found_tel,found_wx,found_QQ,def1,def2) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
 			// 设定参数，替换问号
 			psmt.setString(1,foundVO.getImage());
@@ -338,7 +338,7 @@ public class detailInfoDao extends BaseDao{
 			psmt.setString(15, foundVO.getFound_wx());
 			psmt.setString(16, foundVO.getFound_QQ());
 			psmt.setString(17, foundVO.getDef1());
-
+			psmt.setString(18, foundVO.getDef2());
 			// 执行语句
 			i = psmt.executeUpdate();
 
@@ -424,6 +424,71 @@ public class detailInfoDao extends BaseDao{
 			
 			closeCon(con,psmt);
 		}
+	}
+	/**
+	 * 后台管理删除功能
+	 * @param id
+	 * @param def1
+	 */
+	public static void adminDelete(String id) {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		
+		try {
+			
+			// 1.建立连接
+			con = getCon();
+			// 2.创建语句
+			String sql = "delete from laf_pageinfo where id = ?";
+			psmt = con.prepareStatement(sql);
+			// 替换？
+			
+			psmt.setString(1, id);
+			
+			// 3.执行语句
+			psmt.executeUpdate();
+			
+			// 4.处理结果
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			closeCon(con,psmt);
+		}
+	}
+	/**
+	 * 后台管理查询条数
+	 * @return 
+	 * 
+	 * 
+	 */
+	public static int adminNums() {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		int i = 0;
+		try {
+			// 1.建立连接
+			con = getCon();
+			// 2.创建语句
+			String sql = "select count(id) from laf_pageinfo";
+			psmt = con.prepareStatement(sql);
+			// 替换？
+			// 3.执行语句 b   
+			ResultSet j = psmt.executeQuery();
+			j .first();
+			 i = j.getInt(1);
+			// 4.处理结果
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			closeCon(con,psmt);
+		}
+		return i;
 	}
 //	public static int addThumb(String blogId) {
 //		

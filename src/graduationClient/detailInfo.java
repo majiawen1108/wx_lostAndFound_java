@@ -37,6 +37,9 @@ public class detailInfo  extends HttpServlet {
 	        
 			//访问数据库获取所有的博文信息
 			List<FOUNDdetailInfoVO> list = detailInfoDao.selectAllBlog();
+		
+		
+			
 			//将数据绑定到请求对象中
 			req.setAttribute("list", list);
 			 //返回值给微信小程序

@@ -39,9 +39,11 @@ public class push extends HttpServlet{
 		String found_wx = req.getParameter("found_wx");
 		String found_QQ = req.getParameter("found_QQ");
 		String def1 = req.getParameter("def1");
+		String def2 = req.getParameter("def2");
 		
 		FOUNDdetailInfoVO foundVO = new FOUNDdetailInfoVO();
 		foundVO.setDef1(def1);
+		foundVO.setDef2(def2);
 		foundVO.setFound_address(found_address);
 		foundVO.setFound_category(found_category);
 		foundVO.setFound_details(found_details);
@@ -58,6 +60,7 @@ public class push extends HttpServlet{
 		foundVO.setFound_wx(found_wx);
 		foundVO.setId_address(id_address);
 		foundVO.setFound_det_address(found_det_address);
+		
 		userVO vo = new userVO();
 		vo.setDef1(def1);
 		int  i = detailInfoDao.saveBlog(foundVO, vo);
