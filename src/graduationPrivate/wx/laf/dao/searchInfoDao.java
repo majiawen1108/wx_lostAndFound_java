@@ -100,7 +100,7 @@ public class searchInfoDao extends BaseDao{
 					+ "search_date,search_address,search_det_address,"
 					+ "search_state,search_name,search_tel,search_wx,search_QQ,search_create_date "
 					+ "from laf_search f left join laf_user u on f.def1=u.def1"
-					+ " where u.def1 = "+def1+" order by search_create_date desc,f.id desc";
+					+ " where u.def1 = '"+def1+"' order by search_create_date desc,f.id desc";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句

@@ -109,7 +109,7 @@ public class detailInfoDao extends BaseDao{
 					+ "found_lost_name,found_tag,found_det_address,"
 					+ "id_address,found_details,found_name,found_tel,"
 					+ "found_wx,found_QQ ,found_create_date "
-					+ "from laf_pageinfo f left join laf_user u on f.def1=u.def1 where u.def1 = "+def1+" order by found_create_date desc,id desc";
+					+ "from laf_pageinfo f left join laf_user u on f.def1=u.def1 where u.def1 = '"+def1+"' order by found_create_date desc,id desc";
 			psmt = con.prepareStatement(sql);
 			
 			// 执行语句

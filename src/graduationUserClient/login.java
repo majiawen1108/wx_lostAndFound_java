@@ -30,11 +30,10 @@ public class login extends HttpServlet{
 
 		// 获取提交数据
 		String username = req.getParameter("username");
-		String password = req.getParameter("password");
 
 		// 判断系统值是否有该用户
 		
-		List<userVO> list = userDao.getUser(username, password);
+		List<userVO> list = userDao.getUser(username);
 		if (list.size() == 0) {
 			req.setAttribute("msg", "用户名或密码错误");
 			return;

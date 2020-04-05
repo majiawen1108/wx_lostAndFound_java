@@ -33,7 +33,7 @@ public class bg_search extends HttpServlet {
 		List<SEARCHdetailInfoVO> list1 = searchInfoDao.selectAllBlog();
 		// 将数据绑定到请求对象中
 		req.setAttribute("list1", list1);
-		
+		req.setAttribute("list6", req.getSession().getAttribute("admin"));
 		// 引导用户进入页面
 		req.getRequestDispatcher("/WEB-INF/page/search.jsp").forward(req, resp);
 	}

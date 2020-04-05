@@ -19,7 +19,7 @@ import graduationPublic.wx.laf.vo.userVO;
 
 public class userDao extends BaseDao {
 
-	public static int saveUser(String username,String password,String nickName,String city,String province,String country,String sex) {
+	public static int saveUser(String openid,String nickName,String city,String province,String country,String sex) {
 		int i = 0;
 
 		Connection con = null;
@@ -29,7 +29,7 @@ public class userDao extends BaseDao {
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "insert into laf_user(nickName,sex,city,province,country,def1,def2) values(?,?,?,?,?,?,?)";
+			String sql = "insert into laf_user(nickName,sex,city,province,country,def1) values(?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
 			// 设定参数，替换问号
 			psmt.setString(1, nickName);
@@ -37,8 +37,8 @@ public class userDao extends BaseDao {
 			psmt.setString(3, city);
 			psmt.setString(4, province);
 			psmt.setString(5, country);
-			psmt.setString(6, username);
-			psmt.setString(7, password);
+			psmt.setString(6, openid);
+			
 
 			// 执行语句
 			i = psmt.executeUpdate();
@@ -59,11 +59,10 @@ public class userDao extends BaseDao {
 	/***
 	 * 根据前台输入的账号密码到数据库中查询数据库中是否存在该账号，即判断该账号是否已注册或者已存在
 	 * 
-	 * @param username
-	 * @param password
+	 * @param openid
 	 * @return
 	 */
-	public static List<userVO> getUser(String username, String password) {
+	public static List<userVO> getUser(String openid) {
 		List<userVO> list = new ArrayList<userVO>();
 
 		Connection con = null;
@@ -73,11 +72,10 @@ public class userDao extends BaseDao {
 			// 1.建立连接
 			con = getCon();
 			// 2.创建语句
-			String sql = "select def1,def2 from laf_user where def1=?and def2 = ?";
+			String sql = "select * from laf_user where def1=?";
 			psmt = con.prepareStatement(sql);
 			// 替换？
-			psmt.setString(1, username);
-			psmt.setString(2, password);
+			psmt.setString(1, openid);
 			
 			// 执行语句
 			ResultSet rs = psmt.executeQuery();
@@ -85,8 +83,13 @@ public class userDao extends BaseDao {
 			while (rs.next()) {
 				// 创建对象，使用查询出的数据对对象进行装配
 				uservo = new userVO();
+				uservo.setId(rs.getInt("id"));
 				uservo.setDef1(rs.getString("def1"));
-				uservo.setDef2(rs.getString("def2"));
+				uservo.setNickName(rs.getString("nickName"));
+				uservo.setCity(rs.getString("city"));
+				uservo.setSex(rs.getString("sex"));
+				uservo.setProvince(rs.getString("province"));
+				uservo.setCountry(rs.getString("country"));
 				list.add(uservo);
 			}
 			rs.close();
@@ -160,7 +163,7 @@ public class userDao extends BaseDao {
 				uservo.setProvince(rs.getString("province"));
 				uservo.setCountry(rs.getString("country"));
 				uservo.setDef1(rs.getString("def1"));
-				uservo.setDef2(rs.getString("def2"));
+				uservo.setDef3(rs.getString("def3"));
 				list.add(uservo);
 			}
 			rs.close();

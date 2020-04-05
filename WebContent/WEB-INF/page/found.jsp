@@ -85,7 +85,7 @@
 					<ul class="nav nav-pills pull-right">
 						<li class="dropdown"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#"><i class="icon-user"></i>
-								<b class="caret"></b> </a>
+								${list6.username}<b class="caret"></b> </a>
 							<ul class="dropdown-menu">
 								<li><a href="admin_login.do">Logout</a></li>
 							</ul></li>

@@ -84,7 +84,7 @@
 
 					<ul class="nav nav-pills pull-right">
 						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"><i class="icon-user"></i> <b
+							data-toggle="dropdown" href="#"><i class="icon-user"></i>${list6.username} <b
 								class="caret"></b> </a>
 							<ul class="dropdown-menu">
 								<li><a href="admin_login.do">Logout</a></li>
@@ -116,8 +116,8 @@
 											<th>城市</th>
 											<th>省份</th>
 											<th>国家</th>
-											<th>账号</th>
-											<th>密码</th>
+											<th>openid</th>
+											<th>授权时间</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -129,7 +129,7 @@
 												<td>${fn:substring(list.province,0,12)}</td>
 												<td>${fn:substring(list.country,0,10)}</td>
 												<td>${fn:substring(list.def1,0,14)}</td>
-												<td>${fn:substring(list.def1,0,20)}</td>
+												<td>${fn:substring(list.def3,0,20)}</td>
 												<td><a href="admin_delete_userinfo.do?id=${ list.id }">删除</a></td>
 											</tr>
 										</c:forEach>

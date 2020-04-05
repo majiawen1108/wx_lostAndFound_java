@@ -34,6 +34,8 @@ public class bg_found extends HttpServlet {
 		// 将数据绑定到请求对象中
 		req.setAttribute("list", list);
 		
+		req.setAttribute("list6", req.getSession().getAttribute("admin"));
+		
 		// 引导用户进入页面
 		req.getRequestDispatcher("/WEB-INF/page/found.jsp").forward(req, resp);
 	}

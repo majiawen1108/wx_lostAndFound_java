@@ -24,7 +24,7 @@ public class bg_superadmin extends HttpServlet {
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		/* 星号表示所有的异域请求都可以接受， */
 		resp.setHeader("Access-Control-Allow-Methods", "GET,POST");
-
+		req.setAttribute("list6", req.getSession().getAttribute("admin"));
 		
 		// 引导用户进入页面
 		req.getRequestDispatcher("/WEB-INF/page/superadmin.jsp").forward(req, resp);

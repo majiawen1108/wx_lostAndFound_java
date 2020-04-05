@@ -30,8 +30,7 @@ public class minePush  extends HttpServlet {
 			req.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
 
-			String i = req.getParameter("id");
-			System.out.println(i);
+			
 			 /* 设置响应头允许ajax跨域访问 */
 	        resp.setHeader("Access-Control-Allow-Origin", "*");
 	        /* 星号表示所有的异域请求都可以接受， */

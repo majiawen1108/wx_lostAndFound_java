@@ -21,6 +21,7 @@ public class userVO {
 	private String def6;
 	private String def7;
 
+	
 	public userVO() {
 		super();
 	}
